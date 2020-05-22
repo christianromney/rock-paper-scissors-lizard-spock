@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-import readline, re, random
+import readline, re, secrets
 
 def read_choice():
     "Prompts the user to input a choice or quit. Will keep asking until it gets valid input."
@@ -47,7 +47,7 @@ def repl(choices):
     try:
         while True:  # loop
             user     = read_choice() # read
-            computer = random.choice(choices)
+            computer = secrets.choice(choices)
             results  = evaluate(choices, user, computer) # eval
             print_results(user, computer, results) # print
     except Exception as e:
