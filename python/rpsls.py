@@ -43,12 +43,12 @@ def print_results(user, computer, results):
     print(human_readable[outcome].format(user.capitalize(), verb, computer.capitalize()), end="\n\n")
     
 def play():
-    "Runs the game loop continuously until quit."
+    "Runs the game REPL continuously until quit."
     try:
-        "Prints a welcome message and starts the game loop."
         print("Welcome to " + ", ".join([s.capitalize() for s in LONG_CHOICES]) + "!", end="\n\n")
         while True:  # loop
-            (user, computer) = (read_choice(), secrets.choice(LONG_CHOICES))  # read
+            user     = read_choice() # read
+            computer = secrets.choice(LONG_CHOICES)
             print_results(user, computer, evaluate(user, computer)) # eval, print
     except Exception as e:
         print(e, "Goodbye!")
