@@ -21,18 +21,18 @@ def evaluate(choices, user, computer):
     user_idx = choices.index(user)
     comp_idx = choices.index(computer)
     #        rock                paper              scissors            lizard              spock
-    score = [[(0,  "Tie"),       (-1, "covers"),    (1,  "smashes"),    (1,  "crushes"),    (-1, "vaporizes")], # rock
-             [(-1, "covers"),    (0,  "Tie"),       (-1, "cut"),        (-1, "eats"),       (1,  "disproves")], # paper
-             [(-1, "crushes"),   (1,  "cut"),       (0,  "Tie"),        (1,  "decapitate"), (-1, "smashes")],   # scissors
-             [(-1, "crushes"),   (1,  "eats"),      (-1, "decapitate"), (0,  "Tie"),        (1,  "poisons")],   # lizard
-             [(1,  "vaporizes"), (-1, "disproves"), (1,  "smashes"),    (-1, "poisons"),    (0,  "Tie")]]       # spock
+    score = [[(0,  "" ),         (-1, "covers"),    (1,  "smashes"),    (1,  "crushes"),    (-1, "vaporizes")], # rock
+             [(-1, "covers"),    (0,  ""),          (-1, "cut"),        (-1, "eats"),       (1,  "disproves")], # paper
+             [(-1, "crushes"),   (1,  "cut"),       (0,  ""),           (1,  "decapitate"), (-1, "smashes")],   # scissors
+             [(-1, "crushes"),   (1,  "eats"),      (-1, "decapitate"), (0,  ""),           (1,  "poisons")],   # lizard
+             [(1,  "vaporizes"), (-1, "disproves"), (1,  "smashes"),    (-1, "poisons"),    (0,  "")]]          # spock
     return score[user_idx][comp_idx]
 
 def human_readable(outcome):
     "Returns a human-readable message format string for the outcome."
     format_string = {
         -1: "Loss! Computer's {2} {1} your {0}.",
-        0:  "{1}! You and the computer each chose '{0}'.",
+        0:  "Tie! You and the computer each chose '{0}'.",
         1:  "Win! Your {0} {1} computer's {2}."
     }
     return format_string[outcome]
