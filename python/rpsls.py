@@ -5,20 +5,17 @@ LONG_CHOICES  = ('rock', 'paper', 'scissors', 'lizard', 'spock')
 SHORT_CHOICES = ("r", "p", "s", "l", "k")
 SHORT_TO_LONG = dict(zip(SHORT_CHOICES, LONG_CHOICES))
 
-def read_choice():
-    "Prompts the user to input a choice or quit. Will keep asking until it gets valid input."
-    while True:
-        user_choice = input("Choose: (r)ock (p)aper (s)cissors (l)izard spoc(k) (q)uit >>> ")
-        match       = re.match(r'^(r(ock)?|p(aper)?|s(cissors)?|l(izard)?|(spoc)?k|q(uit)?)$', user_choice)
-
-        if match is None:
-            print("Invalid choice, try again.")
-        elif match.group(1) in ('q', 'quit'):
-            raise Exception("User quit game.")
-        elif match.group(1) in SHORT_CHOICES:
-            return SHORT_TO_LONG[match.group(1)]
-        else:
-            return match.group(1)
+def validate_choice(choice):
+    "Validates an input value as one of the game options."
+    match = re.match(r'^(r(ock)?|p(aper)?|s(cissors)?|l(izard)?|(spoc)?k|q(uit)?)$', user_choice)
+    if match is None:
+        print("Invalid choice, try again.")
+    elif match.group(1) in ('q', 'quit'):
+        raise Exception("User quit game.")
+    elif match.group(1) in SHORT_CHOICES:
+        return SHORT_TO_LONG[match.group(1)]
+    else:
+        return match.group(1)
 
 def evaluate(user, computer):
     "Scores the battle between user and computer."
@@ -41,7 +38,13 @@ def format_results(user, computer, results):
          1: "Win! Your {0} {1} computer's {2}."
     }
     human_readable[outcome].format(user.capitalize(), verb, computer.capitalize())
-    
+
+def read_choice():
+    "Prompts the user to input a choice or quit. Will keep asking until it gets valid input."
+    while True:
+        user_choice = input("Choose: (r)ock (p)aper (s)cissors (l)izard spoc(k) (q)uit >>> ")
+        validate_choice(user_choice)
+
 def play():
     "Runs the game REPL continuously until quit."
     try:
