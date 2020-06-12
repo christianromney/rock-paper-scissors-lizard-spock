@@ -9,7 +9,7 @@ def validate_choice(user_choice):
     "Validates an input value as one of the game options."
     match = re.match(r'^(r(ock)?|p(aper)?|s(cissors)?|l(izard)?|(spoc)?k|q(uit)?)$', user_choice)
     if match is None:
-        print("Invalid choice, try again.")
+        return match
     elif match.group(1) in ('q', 'quit'):
         raise Exception("User quit game.")
     elif match.group(1) in SHORT_CHOICES:
@@ -37,13 +37,17 @@ def format_results(user, computer, results):
          0: "Tie! You and the computer each chose '{0}'.",
          1: "Win! Your {0} {1} computer's {2}."
     }
-    human_readable[outcome].format(user.capitalize(), verb, computer.capitalize())
+    return human_readable[outcome].format(user.capitalize(), verb, computer.capitalize())
 
 def read_choice():
     "Prompts the user to input a choice or quit. Will keep asking until it gets valid input."
     while True:
         user_choice = input("Choose: (r)ock (p)aper (s)cissors (l)izard spoc(k) (q)uit >>> ")
-        validate_choice(user_choice)
+        valid = validate_choice(user_choice)
+        if valid is None:
+            print("Invalid choice, try again.")
+            continue
+        return valid
 
 def play():
     "Runs the game REPL continuously until quit."
