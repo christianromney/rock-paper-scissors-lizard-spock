@@ -43,11 +43,11 @@ def read_choice():
     "Prompts the user to input a choice or quit. Will keep asking until it gets valid input."
     while True:
         user_choice = input("Choose: (r)ock (p)aper (s)cissors (l)izard spoc(k) (q)uit >>> ")
-        valid = validate_choice(user_choice)
-        if valid is None:
+        valid_pick  = validate_choice(user_choice)
+        if valid_pick is None:
             print("Invalid choice, try again.")
             continue
-        return valid
+        return valid_pick
 
 def play():
     "Runs the game REPL continuously until quit."
