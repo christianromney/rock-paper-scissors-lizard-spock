@@ -5,7 +5,7 @@ LONG_CHOICES  = ('rock', 'paper', 'scissors', 'lizard', 'spock')
 SHORT_CHOICES = ("r", "p", "s", "l", "k")
 SHORT_TO_LONG = dict(zip(SHORT_CHOICES, LONG_CHOICES))
 
-def validate_choice(choice):
+def validate_choice(user_choice):
     "Validates an input value as one of the game options."
     match = re.match(r'^(r(ock)?|p(aper)?|s(cissors)?|l(izard)?|(spoc)?k|q(uit)?)$', user_choice)
     if match is None:
