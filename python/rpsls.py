@@ -32,15 +32,15 @@ def evaluate(user, computer):
              [(1,  "vaporizes"), (-1, "disproves"), (1,  "smashes"),    (-1, "poisons"),    (0,  "")]]          # spock
     return score[user_idx][comp_idx]
 
-def print_results(user, computer, results):
-    "Prints the outcome to the screen."
+def format_results(user, computer, results):
+    "Formats the outcome for printing to the screen."
     (outcome, verb) = results
     human_readable = {
         -1: "Loss! Computer's {2} {1} your {0}.",
          0: "Tie! You and the computer each chose '{0}'.",
          1: "Win! Your {0} {1} computer's {2}."
     }
-    print(human_readable[outcome].format(user.capitalize(), verb, computer.capitalize()), end="\n\n")
+    human_readable[outcome].format(user.capitalize(), verb, computer.capitalize())
     
 def play():
     "Runs the game REPL continuously until quit."
@@ -49,7 +49,8 @@ def play():
         while True:  # loop
             user     = read_choice() # read
             computer = secrets.choice(LONG_CHOICES)
-            print_results(user, computer, evaluate(user, computer)) # eval, print
+            results  = evaluate(user, computer)  # eval
+            print(format_results(user, computer, results), end="\n\n") # print
     except Exception as e:
         print(e, "Goodbye!")
 
